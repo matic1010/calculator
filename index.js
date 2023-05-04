@@ -10,6 +10,9 @@ const operationDisplay = document.querySelector('.operation-display');
 const dotButton = document.querySelector('#dot-button');
 dotButton.addEventListener('click', appendDot);
 
+const resetButton = document.querySelector('#reset');
+resetButton.addEventListener('click', reset);
+
 const numberButtons = document.querySelectorAll('.number-button');
 numberButtons.forEach((numberButton) =>
   numberButton.addEventListener('click', (e) =>
@@ -67,6 +70,15 @@ function evaluate() {
   firstNumber = result;
   secondNumber = null;
   console.log(result);
+}
+
+function reset() {
+  firstNumber = null;
+  secondNumber = null;
+  operation = null;
+  shouldReset = false;
+  numberDisplay.textContent = '';
+  operationDisplay.textContent = '';
 }
 
 function add(a, b) {
