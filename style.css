@@ -7,6 +7,10 @@ body {
   width: 450px;
 }
 
+.calculator-display {
+  text-align: end;
+}
+
 .calculator-buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
