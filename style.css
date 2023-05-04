@@ -9,6 +9,7 @@ body {
 
 .calculator-display {
   text-align: end;
+  height: 64px;
 }
 
 .calculator-buttons {

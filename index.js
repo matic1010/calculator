@@ -7,6 +7,9 @@ const numberDisplay = document.querySelector('.number-display');
 
 const operationDisplay = document.querySelector('.operation-display');
 
+const dotButton = document.querySelector('#dot-button');
+dotButton.addEventListener('click', appendDot);
+
 const numberButtons = document.querySelectorAll('.number-button');
 numberButtons.forEach((numberButton) =>
   numberButton.addEventListener('click', (e) =>
@@ -25,14 +28,28 @@ const equalsButton = document.querySelector('#equals-button');
 equalsButton.addEventListener('click', evaluate);
 
 function appendNumber(number) {
-  if (numberDisplay.textContent === '0' || shouldReset) {
-    numberDisplay.textContent = '';
-    shouldReset = false;
-  }
+  if (numberDisplay.textContent === '0' || shouldReset) resetScreen();
   numberDisplay.textContent += number;
 }
 
+function resetScreen() {
+  numberDisplay.textContent = '';
+  shouldReset = false;
+}
+
+function appendDot() {
+  if (shouldReset) resetScreen();
+  if (numberDisplay.textContent === '') numberDisplay.textContent = '0';
+  if (numberDisplay.textContent.includes('.')) return;
+  numberDisplay.textContent += '.';
+}
+
 function handleOperationButton(operator) {
+  if (operation) {
+    operation = operator;
+    operationDisplay.textContent = `${firstNumber} ${operation}`;
+    return;
+  }
   operation = operator;
   firstNumber = Number(numberDisplay.textContent);
   numberDisplay.textContent = '';
@@ -46,7 +63,7 @@ function evaluate() {
   const result = operate(operation, firstNumber, secondNumber);
   numberDisplay.textContent = result;
   operationDisplay.textContent += ' ' + secondNumber;
-  operator = null;
+  operation = null;
   firstNumber = result;
   secondNumber = null;
   console.log(result);
