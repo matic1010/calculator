@@ -51,6 +51,7 @@ function handleOperationButton(operator) {
   if (operation) {
     operation = operator;
     operationDisplay.textContent = `${firstNumber} ${operation}`;
+    shouldReset = true;
     return;
   }
   operation = operator;
@@ -69,7 +70,7 @@ function evaluate() {
   operation = null;
   firstNumber = result;
   secondNumber = null;
-  console.log(result);
+  shouldReset = true;
 }
 
 function reset() {
